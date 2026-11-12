@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.9"
-# dependencies = ["pillow", "numpy"]
+# requires-python = ">=3.12"
+# dependencies = ["pillow==13.0.0", "numpy==2.5.4"]
 # ///
 """Slice a long image into a set of images sized for a post on X.
 
@@ -15,7 +15,8 @@ Subcommands:
   stitch     rebuild a high-resolution long image from page images, using a
              low-resolution long image as the layout reference
 
-Run: uv run slice.py <subcommand> ...
+Run: uv run --locked --script slice.py <subcommand> ...
+(dependencies are pinned in the header above and locked in slice.py.lock)
 """
 import argparse
 import os

@@ -18,7 +18,7 @@ Light and dark backgrounds both work.
 
 ## Requirements
 
-- [uv](https://docs.astral.sh/uv/) to run the bundled script. On first run, uv downloads Pillow and NumPy from PyPI. The script makes no other network requests.
+- [uv](https://docs.astral.sh/uv/) to run the bundled script. On first run, uv downloads Pillow 13.0.0 and NumPy 2.5.4 from PyPI (and Python 3.12 if you do not have it). Both versions are pinned in the script header and locked with hashes in `slice.py.lock`. The script itself makes no network requests, and reads and writes only the image files and folders you point it at.
 - Optional: [poppler](https://poppler.freedesktop.org/) (`pdfimages`, `pdftoppm`) when the source is a PDF.
 
 ## Install
@@ -41,13 +41,13 @@ Claude finds the file, reads it, chooses the cut points, slices, checks the resu
 `skills/long-image-to-x/scripts/slice.py` also works as a standalone command-line tool:
 
 ```bash
-uv run slice.py gaps    long.png                       # list safe cut points
-uv run slice.py preview long.png --out /tmp/preview    # previews with a y-axis ruler
-uv run slice.py slice   long.png --cuts 1676,3308,5010 --out x-post --name my-essay --issue 3 --watermark "@myhandle"
-uv run slice.py sheet   x-post/03_my-essay/*.png --out /tmp/sheet.png
+uv run --locked --script slice.py gaps    long.png                       # list safe cut points
+uv run --locked --script slice.py preview long.png --out /tmp/preview    # previews with a y-axis ruler
+uv run --locked --script slice.py slice   long.png --cuts 1676,3308,5010 --out x-post --name my-essay --issue 3 --watermark "@myhandle"
+uv run --locked --script slice.py sheet   x-post/03_my-essay/*.png --out /tmp/sheet.png
 ```
 
-Run `uv run slice.py <subcommand> --help` for every option.
+Run `uv run --locked --script slice.py <subcommand> --help` for every option.
 
 ## A note on X's limits
 

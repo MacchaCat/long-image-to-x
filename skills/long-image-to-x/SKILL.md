@@ -8,10 +8,10 @@ license: MIT
 
 Turn one very long image into a few images that fit in a single post and read well on a phone. The mechanical work (measuring gaps, trimming, cutting, contact sheets) is done by `scripts/slice.py`. Your job is deciding where to cut.
 
-The script declares its own dependencies, so run it with `uv run` (system Python usually has no Pillow):
+The script declares its own dependencies (Pillow and NumPy, pinned to exact versions and locked in `scripts/slice.py.lock`), so run it with `uv run --locked --script` rather than plain `python` (system Python usually has no Pillow):
 
 ```bash
-uv run ${CLAUDE_SKILL_DIR}/scripts/slice.py <subcommand> --help
+uv run --locked --script ${CLAUDE_SKILL_DIR}/scripts/slice.py <subcommand> --help
 ```
 
 `${CLAUDE_SKILL_DIR}` is the folder that contains this SKILL.md. If it shows up unexpanded in your environment, substitute that folder's path.
@@ -33,8 +33,8 @@ When page images are sharper but only the long image has the right layout, use `
 ### 2. Measure the gaps and read the content
 
 ```bash
-uv run ${CLAUDE_SKILL_DIR}/scripts/slice.py gaps    <long image>
-uv run ${CLAUDE_SKILL_DIR}/scripts/slice.py preview <long image> --out <temp dir>
+uv run --locked --script ${CLAUDE_SKILL_DIR}/scripts/slice.py gaps    <long image>
+uv run --locked --script ${CLAUDE_SKILL_DIR}/scripts/slice.py preview <long image> --out <temp dir>
 ```
 
 `preview` writes segment images with a ruler on the left: grey numbers are y coordinates, green bars are gaps, and the green number is the gap's midpoint. Read every preview and work out what sits above and below each gap. Choosing cut points without reading them is how an illustration ends up in a different image from the paragraph that explains it.
@@ -55,7 +55,7 @@ In order of importance:
 ### 4. Slice
 
 ```bash
-uv run ${CLAUDE_SKILL_DIR}/scripts/slice.py slice <long image> --cuts <y1,y2,y3> --out <output root> --name <title> --issue <number>
+uv run --locked --script ${CLAUDE_SKILL_DIR}/scripts/slice.py slice <long image> --cuts <y1,y2,y3> --out <output root> --name <title> --issue <number>
 ```
 
 - **One folder per set.** With `--issue N`, output goes to `<output root>/<2-digit issue>_<title>/` as `<title>_1.png`, `<title>_2.png` and so on. Sets never mix, and uploading in file-name order gives the right sequence.
@@ -71,7 +71,7 @@ The script prints each image's size, ratio and file size, and warns about anythi
 ### 5. Check visually
 
 ```bash
-uv run ${CLAUDE_SKILL_DIR}/scripts/slice.py sheet <finished images> --out <temp dir>/sheet.png
+uv run --locked --script ${CLAUDE_SKILL_DIR}/scripts/slice.py sheet <finished images> --out <temp dir>/sheet.png
 ```
 
 Read the contact sheet and confirm, image by image: no text or art is cut, no figure is separated from its text, each image opens naturally, top and bottom padding match, and any watermark is legible and clear of the content. If `stitch` was used, also extract each seam at full resolution with `crop` and confirm nothing is misaligned. Fix the cut points and re-slice when something is wrong; do not deliver with a known problem.
