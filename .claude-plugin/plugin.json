@@ -2,6 +2,9 @@
   "name": "long-image-to-x",
   "version": "1.0.0",
   "description": "Slice a long image (illustrated essay, webcomic, infographic, long screenshot) into a set of images ready to post on X: trims margins, cuts between content blocks, at most 4 images per post, optional watermark.",
+  "author": {
+    "name": "macchacat"
+  },
   "license": "MIT",
   "keywords": [
     "x",
