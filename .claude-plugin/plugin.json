@@ -16,5 +16,7 @@
     "social-media"
   ],
   "homepage": "https://github.com/MacchaCat/long-image-to-x",
-  "repository": "https://github.com/MacchaCat/long-image-to-x"
+  "repository": "https://github.com/MacchaCat/long-image-to-x",
+  "documentationUrl": "https://github.com/MacchaCat/long-image-to-x#readme",
+  "supportUrl": "https://github.com/MacchaCat/long-image-to-x/issues"
 }
