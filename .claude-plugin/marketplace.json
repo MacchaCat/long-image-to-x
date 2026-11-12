@@ -1,0 +1,14 @@
+{
+  "name": "long-image-to-x-marketplace",
+  "description": "Skills for preparing artwork and long-form posts for social media.",
+  "owner": {
+    "name": "macchacat"
+  },
+  "plugins": [
+    {
+      "name": "long-image-to-x",
+      "source": "./",
+      "description": "Slice a long image into a set of images ready to post on X: trims margins, cuts between content blocks, at most 4 images per post, optional watermark."
+    }
+  ]
+}
