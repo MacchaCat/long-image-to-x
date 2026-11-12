@@ -30,11 +30,23 @@ Light and dark backgrounds both work.
 
 ## Use
 
-Ask in plain words, for example:
+Ask in plain words. Three examples:
 
 > Slice ~/Downloads/my-essay@2x.png into images for X. It's issue 3, and put @myhandle on them.
 
+> I have a long webcomic at ./comic-long.png. Split it into a four-image post for Twitter, no watermark.
+
+> These four images in ./x-post/02_my-essay/ are already cut. Add the watermark @myhandle to each one.
+
 Claude finds the file, reads it, chooses the cut points, slices, checks the result and tells you what is in each image.
+
+## Troubleshooting
+
+- **`uv: command not found`**: install [uv](https://docs.astral.sh/uv/) and try again.
+- **"cut ... lands on a row with content"**: the cut point is on text or art. Run `gaps` or `preview` and use a gap midpoint.
+- **No gaps found on a JPEG source**: compression noise is being read as content. Raise `--thresh`, for example `--thresh 120`.
+- **"output is only ...px wide"**: the source is a 1x export. Re-export at 2x for sharper text.
+- **"already holds ... file(s)"**: the output folder has an earlier version. Add `--replace` to overwrite it.
 
 ## Using the script on its own
 
@@ -52,6 +64,10 @@ Run `uv run --locked --script slice.py <subcommand> --help` for every option.
 ## A note on X's limits
 
 The limits built into the script (4096 px on the long side, 5 MB per image) are conservative values and were not confirmed against official X documentation. Exceeding them only prints a warning.
+
+## Privacy
+
+Everything runs locally and nothing is sent anywhere. See [PRIVACY.md](PRIVACY.md).
 
 ## License
 
